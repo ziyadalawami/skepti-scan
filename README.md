@@ -6,9 +6,9 @@ A RAG-based fact-checking API built with FastAPI to verify claims against extern
 
 - Python 3.14 or later
 
-#### Install python using miniconda
+#### Install python using Miniconda:
 
-1) Download and install MiniConda from [here](https://docs.anaconda.com/free/miniconda/#quick-command-line-install)
+1) Download and install Miniconda from [here](https://docs.anaconda.com/free/miniconda/#quick-command-line-install)
 2) Create a new environment using the following command:
 ```bash
 $ conda create -n skepti-app python=3.14
