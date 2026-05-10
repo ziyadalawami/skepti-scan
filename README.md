@@ -1,6 +1,6 @@
 # Skepti Scan
 
-A RAG-based fact-checking API built with FastAPI to verify claims against external sources.
+A RAG-based fact-checking API built with FastAPI to verify claims against external sources. It was made by Ziad Ahmed and Yousef Tarek .
 
 ## Requirements
 
