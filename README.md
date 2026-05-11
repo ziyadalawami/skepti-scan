@@ -1,6 +1,6 @@
 # Skepti Scan
 
-A RAG-based fact-checking API built with FastAPI to verify claims against external sources. It was made by Ziad Ahmed and Yousef Tarek .
+A RAG-based fact-checking API built with FastAPI to verify claims against external sources.
 
 ## Requirements
 
@@ -28,6 +28,12 @@ $ pip install -r requirements.txt
 
 ```bash
 $ cp .env.example .env
+```
+
+### Run the Host API
+
+```bash
+$ uvicorn main:app --reload --host 0.0.0.0 --port 5000
 ```
 
 Set your environment variables in the `.env` file. Like `OPENAI_API_KEY` value.
