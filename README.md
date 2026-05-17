@@ -6,7 +6,7 @@ A RAG-based fact-checking API built with FastAPI to verify claims against extern
 
 - Python 3.14 or later
 
-#### Install python using Miniconda:
+#### Install python using Miniconda
 
 1) Download and install Miniconda from [here](https://docs.anaconda.com/free/miniconda/#quick-command-line-install)
 2) Create a new environment using the following command:
