@@ -57,7 +57,7 @@ Create a `.env` file in the root directory and configure these exact values:
 DB_PASSWORD=your_secure_database_password
 OPENROUTER_API_KEY=your_openrouter_api_key_here
 ```
-*(Note: Other values in the env file are optional to change.)*
+> **Note:** Other values in the env file are optional to change.
 
 **5. Spin up the Database Container:**<br>
 *(Note: This starts only the isolated PostgreSQL database.)*
