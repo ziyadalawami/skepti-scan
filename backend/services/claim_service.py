@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from uuid import UUID
-from app.db.models import Claim
-from app.services.ai import evaluate_claim
+from backend.db.models import Claim
+from backend.services.ai import evaluate_claim
 
 def create_and_process_claim(db: Session, claim_text: str):
     """Saves a new claim, runs AI evaluation, and updates the database."""

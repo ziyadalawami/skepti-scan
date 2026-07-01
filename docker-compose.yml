@@ -19,7 +19,7 @@ services:
 
   # 2. Your FastAPI Application Service (Backend)
   api:
-    build: ./app
+    build: ./backend
     container_name: skeptiscan_api
     restart: always
     # This tells Docker to wait for the database to start before starting the API

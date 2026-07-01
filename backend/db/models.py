@@ -2,7 +2,7 @@ import uuid
 import enum
 from datetime import datetime, timezone
 from sqlalchemy import Column, String, Float, Text, DateTime, Enum, JSON, Uuid
-from app.db.database import Base
+from backend.db.database import Base
 
 class ClaimStatus(str, enum.Enum):
     """The lifecycle stages of a fact-check request."""

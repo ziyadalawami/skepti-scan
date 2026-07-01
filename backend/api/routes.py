@@ -3,9 +3,9 @@ from sqlalchemy.orm import Session
 from typing import List
 from uuid import UUID
 
-from app.db.database import get_db
-from app.api.schemas import ClaimCreate, ClaimResponse
-from app.services import claim_service
+from backend.db.database import get_db
+from backend.api.schemas import ClaimCreate, ClaimResponse
+from backend.services import claim_service
 
 # Group all these endpoints under the /api/v1 prefix
 router = APIRouter(prefix="/api/v1", tags=["Verification"])

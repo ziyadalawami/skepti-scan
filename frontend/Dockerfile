@@ -2,7 +2,7 @@
 FROM python:3.11-slim
 
 # Set the working directory inside the container
-WORKDIR /src
+WORKDIR /app
 
 # Copy your requirements file first (this makes rebuilding faster)
 COPY requirements.txt .

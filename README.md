@@ -21,7 +21,7 @@ Skepti-Scan is a ruthlessly analytical RAG-based fact-checking API built with Fa
 
 ## 🛠️ Requirements
 
-* Python 3.11 (Slim)
+* Python 3.11
 * Docker Desktop installed and running
 * Miniconda (Recommended for local backend development)
 
@@ -75,7 +75,7 @@ docker compose up -d db
 **6. Run the API (Backend):**
 
 ```bash
-uvicorn app.main:app --reload --port 8000
+uvicorn backend.main:app --reload --port 8000
 ```
 
 *The API interactive documentation will be available at `http://localhost:8000/docs`.*

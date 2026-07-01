@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
-from app.core.config import settings
+from backend.core.config import settings
 
 # Create the SQLAlchemy engine using the URL from our config
 engine = create_engine(settings.DATABASE_URL)

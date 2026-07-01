@@ -2,7 +2,7 @@ from pydantic import BaseModel, ConfigDict
 from typing import Optional, List
 from uuid import UUID
 from datetime import datetime
-from app.db.models import ClaimStatus
+from backend.db.models import ClaimStatus
 
 # 1. What the user sends to the API
 class ClaimCreate(BaseModel):

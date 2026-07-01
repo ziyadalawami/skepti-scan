@@ -1,8 +1,8 @@
 import json
 from langchain_openai import ChatOpenAI
-from app.core.config import settings
-from app.services.ai.prompts import EVALUATION_PROMPT
-from app.services.ai.retriever import search_web_for_claim, format_context_for_llm
+from backend.core.config import settings
+from backend.services.ai.prompts import EVALUATION_PROMPT
+from backend.services.ai.retriever import search_web_for_claim, format_context_for_llm
 
 llm = ChatOpenAI(
     api_key=settings.OPENROUTER_API_KEY,
