@@ -1,0 +1,54 @@
+services:
+  # 1. The PostgreSQL Database Service
+  db:
+    image: postgres:14.23-alpine3.24
+    container_name: skeptiscan_postgres
+    restart: always
+    # Docker will automatically read your .env file for the DB credentials
+    env_file:
+      - .env
+    # We pass the specific variables Postgres needs to initialize
+    environment:
+      POSTGRES_USER: ${DB_USER:-admin}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME:-skepti_scan}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # 2. Your FastAPI Application Service (Backend)
+  api:
+    build: ./app
+    container_name: skeptiscan_api
+    restart: always
+    # This tells Docker to wait for the database to start before starting the API
+    depends_on:
+      - db
+    ports:
+      - "${API_PORT:-8000}:8000"
+    env_file:
+      - .env
+    # Override the DB_HOST here because inside Docker, the database is reachable via the service name "db"
+    environment:
+      - DB_HOST=db
+
+  # 3. Your Streamlit Application Service (Frontend)
+  frontend:
+    build: ./frontend
+    container_name: skeptiscan_frontend
+    restart: always
+    # Wait for the API to be up before starting the UI
+    depends_on:
+      - api
+    ports:
+      - "${FRONTEND_PORT:-8501}:8501"
+    env_file:
+      - .env
+    # This tells Streamlit how to talk to the FastAPI backend over the internal Docker network
+    environment:
+      - API_URL=http://api:8000
+
+# This creates a persistent volume so your database data isn't lost if the container stops
+volumes:
+  postgres_data:
