@@ -2,9 +2,8 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
 from uuid import UUID
-
 from backend.db.database import get_db
-from backend.api.schemas import ClaimCreate, ClaimResponse
+from backend.api.schemas import ClaimCreate, ClaimBatchCreate, ClaimResponse
 from backend.services import claim_service
 
 # Group all these endpoints under the /api/v1 prefix
@@ -14,6 +13,11 @@ router = APIRouter(prefix="/api/v1", tags=["Verification"])
 def verify_claim(claim_in: ClaimCreate, db: Session = Depends(get_db)):
     """Submit a new claim for fact-checking."""
     return claim_service.create_and_process_claim(db=db, claim_text=claim_in.claim_text)
+
+@router.post("/verify/batch", response_model=List[ClaimResponse], status_code=status.HTTP_201_CREATED)
+def verify_batch_claims(batch_in: ClaimBatchCreate, db: Session = Depends(get_db)):
+    """Submit multiple claims for sequential fact-checking."""
+    return claim_service.create_and_process_batch(db=db, claims=batch_in.claims)
 
 @router.get("/claims", response_model=List[ClaimResponse])
 def list_claims(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):

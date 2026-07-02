@@ -8,7 +8,11 @@ from backend.db.models import ClaimStatus
 class ClaimCreate(BaseModel):
     claim_text: str
 
-# 2. What the API returns to the user
+# 2. Schema for batch ingestion
+class ClaimBatchCreate(BaseModel):
+    claims: List[str]
+
+# 3. What the API returns to the user
 class ClaimResponse(BaseModel):
     id: UUID
     claim_text: str

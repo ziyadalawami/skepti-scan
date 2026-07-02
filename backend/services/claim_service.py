@@ -2,6 +2,7 @@ from sqlalchemy.orm import Session
 from uuid import UUID
 from backend.db.models import Claim
 from backend.services.ai import evaluate_claim
+from typing import List
 
 def create_and_process_claim(db: Session, claim_text: str):
     """Saves a new claim, runs AI evaluation, and updates the database."""
@@ -28,6 +29,15 @@ def create_and_process_claim(db: Session, claim_text: str):
     db.refresh(new_claim)
     
     return new_claim
+
+def create_and_process_batch(db: Session, claims: List[str]):
+    """Iterates through a list of claims and processes them sequentially."""
+    results = []
+    for text in claims:
+        # We simply reuse our robust single-claim logic!
+        claim_result = create_and_process_claim(db=db, claim_text=text)
+        results.append(claim_result)
+    return results
 
 def get_all_claims(db: Session, skip: int = 0, limit: int = 10):
     """Retrieves a paginated list of claims, newest first."""

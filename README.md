@@ -12,6 +12,7 @@ Skepti-Scan is a ruthlessly analytical RAG-based fact-checking API built with Fa
 /api/v1
 └── /verify/
     ├── POST /                 # Submit a single claim for aggressive fact-checking
+    └── POST /batch            # Submit a list of claims for sequential processing
 └── /claims/
     ├── GET  /                 # Retrieve a paginated list of historical investigations
     └── GET  /{id}             # Fetch the detailed verdict of a specific claim
@@ -46,7 +47,7 @@ conda activate skeptiscan-env
 **3. Install the required packages:**
 
 ```bash
-pip install -r requirements.txt
+pip install -r backend/requirements.txt -r frontend/requirements.txt
 ```
 
 **4. Configure your environment variables:**<br>
@@ -117,11 +118,8 @@ You can test the API functionalities using the Swagger UI, the Streamlit fronten
 
 ### 1. Submit a Claim for Verification
 
-The system requires a strict JSON payload. It will search the web, format the context, and return a cold, hard JSON verdict.
-
+The system requires a strict JSON payload. It will search the web, format the context, and return a cold, hard JSON verdict.<br>
 **POST** `/api/v1/verify`
-
-**Request:**
 
 ```json
 {
@@ -129,33 +127,30 @@ The system requires a strict JSON payload. It will search the web, format the co
 }
 ```
 
-**Response:**
+### 2 Submit a Batch of Claims
+Need to scrub a whole list of statements? Send an array of strings, and the system will process them sequentially.<br>
+**POST** `/api/v1/verify/batch`
 
 ```json
 {
-  "id": "123e4567-e89b-12d3-a456-426614174000",
-  "claim_text": "The Great Wall of China is visible from space with the naked eye.",
-  "status": "debunked",
-  "confidence": 0.95,
-  "justification": "Multiple space agencies and astronauts confirm the Great Wall is not visible from low Earth orbit without optical aid.",
-  "sources": [
-    "[https://www.nasa.gov/vision/space/workinginspace/great_wall.html](https://www.nasa.gov/vision/space/workinginspace/great_wall.html)"
-  ],
-  "created_at": "2026-07-01T10:00:00Z"
+  "claims": [
+    "The moon landing was faked.",
+    "Napoleon Bonaparte was extremely short.",
+    "Bats are entirely blind."
+  ]
 }
 ```
 
-### 2. Retrieve Investigation History
+### 3. Retrieve Investigation History
 
 Fetch a paginated list of all previously scrutinized claims.
 
 **GET** `/api/v1/claims?skip=0&limit=10`<br>
 *(No payload required. Use query parameters to control pagination.)*
 
-### 3. Fetch a Specific Verdict
+### 4. Fetch a Specific Verdict
 
 Retrieve the full details of a past investigation.
 
 **GET** `/api/v1/claims/{id}`<br>
 *(No payload required. Pass the investigation's UUID in the URL path.)*
-

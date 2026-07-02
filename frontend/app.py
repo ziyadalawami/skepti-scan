@@ -57,7 +57,7 @@ with tab_investigate:
     # Dropdown for Future Batch Processing
     ingest_mode = st.selectbox(
         "Select Investigation Mode:", 
-        ["Single Claim", "Batch Processing (Coming Soon)"]
+        ["Single Claim", "Batch Processing"]
     )
     
     if ingest_mode == "Single Claim":
@@ -100,8 +100,44 @@ with tab_investigate:
                     except requests.exceptions.ConnectionError:
                         st.error("🚨 Failed to connect to the backend. Ensure your Docker containers are running.")
     
-    elif ingest_mode == "Batch Processing (Coming Soon)":
-        st.info("🚧 **Under Construction:** Soon, you will be able to upload a list of claims (CSV/JSON) and Skepti-Scan will evaluate them all sequentially.")
+    elif ingest_mode == "Batch Processing":
+        with st.form("batch_form"):
+            batch_text = st.text_area(
+                "Enter multiple claims (one per line):", 
+                placeholder="The moon landing was faked.\nNapoleon was extremely short.\nBats are entirely blind."
+            )
+            submitted_batch = st.form_submit_button("🔍 Scrutinize Batch")
+
+        if submitted_batch:
+            # Split the text area by newlines and remove empty lines
+            claims_list = [c.strip() for c in batch_text.split('\n') if c.strip()]
+            
+            if not claims_list:
+                st.error("I cannot investigate silence. Please enter at least one claim.")
+            else:
+                with st.spinner(f"Cross-referencing {len(claims_list)} claims sequentially. This may take a moment... 🕵️‍♂️"):
+                    try:
+                        response = requests.post(f"{API_URL}/verify/batch", json={"claims": claims_list})
+                        
+                        if response.status_code == 201:
+                            results = response.json()
+                            st.success(f"Successfully processed {len(results)} claims!")
+                            
+                            # Display each result in a neat expander
+                            for data in results:
+                                icon = "✅" if data['status'] == "verified" else "❌" if data['status'] == "debunked" else "⚠️"
+                                with st.expander(f"{icon} {data['claim_text'][:60]}..."):
+                                    st.write(f"**Verdict:** {data['status'].upper()} (Confidence: {(data['confidence'] or 0.0)*100:.1f}%)")
+                                    st.write(f"**Justification:** {data['justification']}")
+                                    if data.get('sources'):
+                                        st.markdown("**Sources:**")
+                                        for s in data['sources']:
+                                            st.markdown(f"- [{s}]({s})")
+                        else:
+                            st.error(f"Backend rejected the batch request: {response.text}")
+                            
+                    except requests.exceptions.ConnectionError:
+                        st.error("🚨 Failed to connect to the backend. Ensure your Docker containers are running.")
 
 # TAB 2: Historical Log
 with tab_log:
