@@ -36,13 +36,18 @@ with st.sidebar:
     st.divider()
     
     # 2. About the Project Expander
-    with st.expander("🕵️ About the Project"):
-        st.markdown("""
-        **Why Skepti-Scan?**
-        * **We Assume You're Lying:** An AI tool built on the premise that raw claims without sources are useless.
-        * **Live RAG Pipeline:** We don't rely on hallucinated LLM memories. We cross-reference claims against live web data.
-        * **Cold, Hard JSON:** Structured outputs meant for serious database ingestion, not just chatbots.
-        """)
+    with st.expander("🕵️ About Skepti-Scan", expanded=True):
+        st.markdown("### **Trust is good. Verification is better.**")
+        st.markdown(
+            "Skepti-Scan is like that one highly analytical colleague who never takes a claim at face value. "
+            "Instead of just accepting statements, it actively investigates them."
+        )
+        st.markdown(
+            "* It doesn't rely on hallucinated AI memories. It cross-references every claim against live web data.\n"
+            "* It returns clean, definitive verdicts built for serious database ingestion, not just casual chat."
+        )
+        st.markdown("---")
+        st.caption("🔍 Powered by FastAPI, LangChain, PostgreSQL, and live search retrieval.")
 
 # --- MAIN PAGE ---
 st.title("🤨 The Skeptic's Desk")

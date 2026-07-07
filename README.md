@@ -1,8 +1,8 @@
 # 🤨 Skepti-Scan
 
-**Trust nothing. Verify everything.**
+**Trust is good. Verification is better.**
 
-Skepti-Scan is a ruthlessly analytical RAG-based fact-checking API built with FastAPI, LangChain, and PostgreSQL. It operates on a simple premise: raw claims without sources are useless. Instead of relying on an LLM's hallucinated memory, this system cross-references user claims against live web data to determine a definitive verdict.
+Meet Skepti-Scan: your highly analytical, fact-checking API. Skepti-Scan operates on a simple philosophy—it doesn't trust anything it hears until it checks the sources. Instead of relying on an LLM's static, easily hallucinated memory, this system acts as an active investigator. It takes a claim, scours live web data for evidence, cross-references the facts, and returns a definitive, unbiased verdict.
 
 ---
 
