@@ -2,7 +2,7 @@
 
 **Trust is good. Verification is better.**
 
-Meet Skepti-Scan: your highly analytical, fact-checking API. Skepti-Scan operates on a simple philosophy—it doesn't trust anything it hears until it checks the sources. Instead of relying on an LLM's static, easily hallucinated memory, this system acts as an active investigator. It takes a claim, scours live web data for evidence, cross-references the facts, and returns a definitive, unbiased verdict.
+Meet Skepti Scan: your highly analytical, fact checking API. Skepti Scan operates on a simple philosophy; it does not trust anything it hears until it checks the sources. Instead of relying on static memory, this system acts as an active investigator. It takes a claim, scours live web data for evidence, cross references the facts, and returns a definitive, unbiased verdict.
 
 ---
 
